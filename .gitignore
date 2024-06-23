@@ -19,7 +19,9 @@ __pycache__/
 */migrations/*
 
 # Celery beat schedule file
-celerybeat-schedule
+celerybeat-schedule.bak
+celerybeat-schedule.dat 
+celerybeat-schedule.dir 
 
 # Celery logs
 celerybeat.pid

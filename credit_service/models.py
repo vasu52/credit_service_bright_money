@@ -29,7 +29,7 @@ class Payment(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     principal_due = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     interest_due = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    date = models.DateField(default=date.today, editable=True)
+    date = models.DateField(auto_now_add=True)
 
 class Billing(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)

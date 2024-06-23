@@ -67,8 +67,7 @@ def apply_loan(request):
 def make_payment(request):
     loan_id = request.data['loan_id']
     amount = Decimal(request.data['amount'])
-    date = request.data['date']
-    
+
     try:
         loan = Loan.objects.get(id=loan_id)
     except Loan.DoesNotExist:
@@ -101,7 +100,7 @@ def make_payment(request):
                 if loan.principal_due <= 0:
                     loan.is_closed = True
                     loan.save()    
-                payment = Payment(loan=loan, amount=amount, date = date, \
+                payment = Payment(loan=loan, amount=amount,\
                                 principal_due=loan.principal_due, interest_due=loan.interest_due)
                 payment.save()    
                 return Response({'message': 'Payment recorded successfully'}, status=status.HTTP_200_OK) 
@@ -119,7 +118,7 @@ def make_payment(request):
                 next_emi.save()
             EMI.objects.filter(loan=loan, is_paid=False).delete()
             recalculate_emis(loan)
-            payment = Payment(loan=loan, amount=amount, date=date,\
+            payment = Payment(loan=loan, amount=amount,\
                             principal_due=loan.principal_due, interest_due=loan.interest_due)
             payment.save()
 
